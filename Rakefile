@@ -17,3 +17,11 @@ end
 file 'assignment3.pdf' => ['assignment3.md', 'apa.csl'] do |t|
   sh "pandoc --filter pandoc-citeproc #{t.source} -o #{t.name}"
 end
+
+file 'assignment3.tex' => ['assignment3.md', 'apa.csl'] do |t|
+  sh "pandoc --filter pandoc-citeproc #{t.source} -o #{t.name}"
+end
+
+task 'wc' => 'assignment3.tex' do |t|
+  sh "texcount #{t.source}"
+end
