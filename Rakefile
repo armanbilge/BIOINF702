@@ -19,7 +19,7 @@ file 'assignment3.pdf' => ['assignment3.md', 'apa.csl'] do |t|
 end
 
 file 'assignment3.tex' => ['assignment3.md', 'apa.csl'] do |t|
-  sh "pandoc -f markdown-all_symbols_escapable --filter pandoc-citeproc #{t.source} -o #{t.name}"
+  sh "pandoc --filter pandoc-citeproc #{t.source} -o #{t.name}"
 end
 
 task 'wc' => 'assignment3.tex' do |t|
