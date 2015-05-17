@@ -4,6 +4,8 @@ task 'assignment1' => 'assignment1.pdf'
 
 task 'assignment3' => 'assignment3.pdf'
 
+task 'assignment4' => 'assignment4.pdf'
+
 file 'apa.csl' do |t|
   open(t.name, 'w') do |f|
     f << open('https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl').read
