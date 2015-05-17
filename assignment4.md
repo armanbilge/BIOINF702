@@ -18,7 +18,7 @@ and different tree toplogies may model recombination.
 Notably, a phylo-HMM is special case of a standard HMM such that the Viterbi, forwards, and backwards algorithms are all applicable.
 This makes working with phylo-HMMs is computationally tractable.
 
-Siepel and Haussler demonstrated the advantages of a phylo-HMM over a normal HMM in a simple gene finder for the mamallian genome.
+Siepel and Haussler demonstrated the advantages of a phylo-HMM over a normal HMM in a simple gene finder for the mammalian genome.
 Their model had four states, one for each of the codon positions and one for noncoding sites.
 The phylogeny and substitution model parameters for these states were based on estimates from the literature.
 They predicted genes using the Viterbi algorithm and compared its accuracy to a prediction using a nonphylo-HMM (that assumes independence of sequences) for datasets of between one and eight species.
@@ -27,8 +27,8 @@ Siepel and Haussler suggested that this discrepancy in performance was because t
 The phylo-HMM was aware of the correlations between sequences and the overall substitution process so was better at distinguishing signal from noise.
 Furthermore, the specific substitutions provided signal that only the phylo-HMM was sensitive to.
 
-In their second example, Siepel and Haussler identify conserved regions of the mamallian genome.
-They created a phylo-HMM with ten rate categories for a total of ten states and fitted the model to the mamallian data.
+In their second example, Siepel and Haussler identify conserved regions of the mammalian genome.
+They created a phylo-HMM with ten rate categories for a total of ten states and fitted the model to the mammalian data.
 Unfortunately no details were provided with regard to how they performed the fitting.
 Then they used the forward-backward algorithm on this dataset to calculate the posterior probability that a site is conserved for each site, achieving results similar to existing analyses.
 The phylo-HMM approach lends several advantages over alternative methods for identifying conserved regions.
@@ -42,18 +42,20 @@ This joint probability and the normalisation term are calculated efficiently usi
 To introduce the context-dependency, the joint probability of several columns is no longer factorised into independent terms but is instead calculated using a higher-order substitution model that provides transition probabilities between every possible configuration of states (similar to a codon model).
 Fortunately, the standard HMM algorithms are unaffected by this change to the emission model.
 These context-dependent phylo-HMM models fitted data much better than simpler models, particularly the third-order model (probably because codons consist of three nucleotides).
-Their results show the importance (as well as the computational feasability) of using context-dependent models.
+Their results show the importance (as well as the computational feasibility) of using context-dependent models.
 
-The computational feasability of phylo-HMMs is best understood when they are treated as graphical models.
+The computational feasibility of phylo-HMMs is best understood when they are treated as graphical models.
 A graphical model is a framework for representing analysing probabilistic models as graphs, and subsequently analysing them using graph theory.
 In a graphical model, each variable in the probabilistic model is represented by a vertex in the graph and conditional dependencies between the variables are represented by directed edges.
-When the graph is a tree, the marginal probabilites for a variable may be computed efficiently using dynamic programming in an elimination algorithm.
+When the graph is a tree, the marginal probabilities for a variable may be computed efficiently using dynamic programming in an elimination algorithm.
 Felsenstein's pruning algorithm and the forward algorithm for HMMs are both specific cases of the elimination algorithm.
 The Viterbi algorithm also takes advantage of the same properties as the elimination algorithm.
-Furthermore, the elimination algorithm can be extend to calculate the posterior probability for all variables in a tree model with two passes of the graph, one to compute the conditional probabilites and a second to compute the marginals.
+Furthermore, the elimination algorithm can be extend to calculate the posterior probability for all variables in a tree model with two passes of the graph, one to compute the conditional probabilities and a second to compute the marginals.
 The forward-backward algorithm is a special case of this.
-Phylo-HMMs are computationally tractable because they are trees when represented as a graphical model.
-The generalised algorithms make it straightforward to perform calculations with these models.
+It turns out that these algorithms do not depend on tree graphs, but on the presence of a good ordering with which to eliminate nodes (which is readily apparent for trees).
+It is for this reason that calculations on phylo-HMMs are computationally tractable and the generalised algorithms readily applicable to them.
+The use of graphical models also highlights when the computations become intractable: in the case of phylo-HMMs, developing a more accurate model of context-dependent substitution creates a lattice graph structure which is known to be difficult to work with efficiently.
+Although it is impossible to use an accurate model for this process, Siepel and Haussler demonstrate that phylo-HMMs are still valid probability models and useful from the practical standpoint.
 
 Siepel, A. and Haussler, D. (2005).
 Phylogenetic Hidden Markov Models.
