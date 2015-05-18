@@ -80,6 +80,7 @@ class SubstitutionModel:
         self.Tinv = LA.inv(self.T)
 
     def transition_matrix(self, t):
+        print(self.L)
         return self.T * np.exp(t * self.mu * self.L) * self.Tinv
 
     def random_sequence(self, L):
@@ -92,7 +93,6 @@ class SubstitutionModel:
             e = np.matrix(np.eye(1, 4, i)).getT()
             P[b] = np.squeeze(np.asarray(T * e))
         print(P)
-        P['A'] = T * np.matrix([1, 0, 0, 0]).getT()
         return ''.join(random.choice(BASES, p=P[x]) for x in S)
 
     def create_Q(abcdef, pi):
@@ -160,7 +160,6 @@ parser.add_argument('filename', help='the filename stem')
 
 args = parser.parse_args()
 
-print(args)
 tree = simulate_tree(args.taxa, args.theta, args.tree_model)
 with open('{}.tree'.format(args.filename), 'w') as f:
     print(tree.get_newick(), file=f)
