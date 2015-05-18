@@ -75,13 +75,11 @@ class SubstitutionModel:
         self.mu = mu
         self.pi = pi
         Q = SubstitutionModel.create_Q(abcdef, pi)
-        L, self.T = LA.eig(Q)
-        self.L = np.diag(L)
+        self.L, self.T = LA.eig(Q)
         self.Tinv = LA.inv(self.T)
 
     def transition_matrix(self, t):
-        print(self.L)
-        return self.T * np.exp(t * self.mu * self.L) * self.Tinv
+        return self.T * np.diag(np.exp(t * self.mu * self.L)) * self.Tinv
 
     def random_sequence(self, L):
         return ''.join(random.choice(BASES, size=L, p=self.pi))
@@ -92,7 +90,7 @@ class SubstitutionModel:
         for i,b in enumerate(BASES):
             e = np.matrix(np.eye(1, 4, i)).getT()
             P[b] = np.squeeze(np.asarray(T * e))
-        print(P)
+            P[b] /= P[b].sum() # Deal with numerical imprecision
         return ''.join(random.choice(BASES, p=P[x]) for x in S)
 
     def create_Q(abcdef, pi):
@@ -161,17 +159,21 @@ parser.add_argument('filename', help='the filename stem')
 args = parser.parse_args()
 
 tree = simulate_tree(args.taxa, args.theta, args.tree_model)
+
 with open('{}.tree'.format(args.filename), 'w') as f:
     print(tree.get_newick(), file=f)
+
 sm = SubstitutionModel(args.mutation_rate, args.rate_matrix, args.frequencies)
 simulate_sequences(tree, sm, args.length)
+
 with open('{}.nex'.format(args.filename), 'w') as f:
     print('#NEXUS', file=f)
     print('Begin data;', file=f)
-    print('Dimensions ntax={} nchar={};'.format(tree.get_leaf_count(), length), file=f)
+    print('Dimensions ntax={} nchar={};'.format(tree.get_leaf_count(),
+          args.length), file=f)
     print('Format datatype=dna missing=? gap=-;', file=f)
     print('Matrix', file=f)
-    for leaf in tree.get_leaves():
+    for leaf in sorted(tree.get_leaves(), key=lambda n: int(n.get_label())):
         print('{}    {}'.format(leaf.get_label(), leaf.get_sequence()), file=f)
     print(';', file=f)
     print('End;', file=f)
