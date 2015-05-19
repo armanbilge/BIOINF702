@@ -45,8 +45,9 @@ def yule_speciations(n, lambd):
     return s
 
 def coal_intervals(n, theta):
-    for k in reversed(range(2, n+1)):
-        yield random.exponential(4 * theta / (k * (k-1)))
+    for k in range(n, 1, -1):
+        # Using scale = 1/lambda parameterisation
+        yield random.exponential(2 * theta / (k * (k-1)))
 
 def coal_coalescents(n, theta):
     return it.accumulate(coal_intervals(n, theta))
