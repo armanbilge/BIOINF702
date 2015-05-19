@@ -33,8 +33,6 @@ import string
 from Tree import Tree
 from Node import Node
 
-BASES = ('A', 'C', 'G', 'T')
-
 def yule_origin(n, lambd):
     return - np.log(1 - np.power(random.random(), 1/n)) / lambd
 
@@ -71,11 +69,14 @@ def simulate_tree(n, p, model):
         nodes.append(node)
     return Tree(nodes[0])
 
-class SubstitutionModel:
+class SubstModel:
+    BASES = ('A', 'C', 'G', 'T')
+    E = tuple(np.matrix(np.eye(1, 4, i)).getT() for i in range(4))
+
     def __init__(self, mu, abcdef, pi):
         self.mu = mu
         self.pi = pi
-        Q = SubstitutionModel.create_Q(abcdef, pi)
+        Q = SubstModel.create_Q(abcdef, pi)
         self.L, self.T = LA.eig(Q)
         self.Tinv = LA.inv(self.T)
 
@@ -83,35 +84,34 @@ class SubstitutionModel:
         return self.T * np.diag(np.exp(t * self.mu * self.L)) * self.Tinv
 
     def random_sequence(self, L):
-        return ''.join(random.choice(BASES, size=L, p=self.pi))
+        return ''.join(random.choice(SubstModel.BASES, size=L, p=self.pi))
 
     def mutate_sequence(self, S, t):
-        T = self.transition_matrix(t)
-        P = {}
-        for i,b in enumerate(BASES):
-            e = np.matrix(np.eye(1, 4, i)).getT()
-            P[b] = np.squeeze(np.asarray(T * e))
-            P[b] /= P[b].sum() # Deal with numerical imprecision
-        return ''.join(random.choice(BASES, p=P[x]) for x in S)
+        P = self.transition_matrix(t)
+        p = {}
+        for e, b in zip(SubstModel.E, SubstModel.BASES):
+            p[b] = np.squeeze(np.asarray(P * e))
+            p[b] /= p[b].sum() # Deal with numerical imprecision
+        return ''.join(random.choice(SubstModel.BASES, p=p[x]) for x in S)
 
     def create_Q(abcdef, pi):
         a, b, c, d, e, f = abcdef
         A, C, G, T = pi
         Q = np.matrix([[0.0] * 4 for _ in range(4)])
-        Q[0,1] = a * C
-        Q[1,0] = a * A
-        Q[0,2] = b * G
-        Q[2,0] = b * A
-        Q[0,3] = c * T
-        Q[3,0] = c * A
-        Q[1,2] = d * G
-        Q[2,1] = d * C
-        Q[3,1] = e * T
+        Q[0,1] = a * A
+        Q[0,2] = b * A
+        Q[0,3] = c * A
+        Q[1,2] = d * C
         Q[1,3] = e * C
-        Q[2,3] = f * T
-        Q[3,2] = f * G
+        Q[2,3] = f * G
+        Q[1,0] = a * C
+        Q[2,0] = b * G
+        Q[3,0] = c * T
+        Q[2,1] = d * G
+        Q[3,1] = e * T
+        Q[3,2] = f * T
         for i in range(4):
-            Q[i,i] = - Q[i,:].sum()
+            Q[i,i] = - Q[:,i].sum()
         beta = 1 / (2 * (a * A * C
                           + b * A * G
                           + c * A * T
@@ -146,9 +146,9 @@ parser.add_argument('-r', '--theta', '--lambda', metavar='R', type=float,
                     required=True, help='the parameter for the tree model')
 parser.add_argument('-l', '--length', metavar='L', type=int, required=True,
                     help='the length of the sequence')
-parser.add_argument('-f', '--frequencies', metavar=BASES,
+parser.add_argument('-f', '--frequencies', metavar=SubstModel.BASES,
                     type=float, nargs=4, required=True,
-                    help='the stationary distribution for the bases')
+                    help='the stationary distribution for the BASES')
 parser.add_argument('-q', '--rate-matrix',
                     metavar=tuple(string.ascii_lowercase[:6]), type=float,
                     nargs=6, required=True,
@@ -164,7 +164,7 @@ tree = simulate_tree(args.taxa, args.theta, args.tree_model)
 with open('{}.tree'.format(args.filename), 'w') as f:
     print(tree.get_newick(), file=f)
 
-sm = SubstitutionModel(args.mutation_rate, args.rate_matrix, args.frequencies)
+sm = SubstModel(args.mutation_rate, args.rate_matrix, args.frequencies)
 simulate_sequences(tree, sm, args.length)
 
 with open('{}.nex'.format(args.filename), 'w') as f:
