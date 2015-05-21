@@ -1,28 +1,29 @@
 """
-sim.py
-
-The MIT License (MIT)
-
-Copyright (c) 2015 Arman Bilge
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+cygnus.py
+A simulator of Coalescent and Yule trees and GTR Nucleotide Sequences.
 """
+
+# The MIT License (MIT)
+#
+# Copyright (c) 2015 Arman Bilge
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 
 from argparse import ArgumentParser
 import itertools as it
@@ -52,24 +53,24 @@ def yule_speciations(n, lambd):
     return s
 
 def coal_intervals(n, theta):
-    """Sample coalescent intervals for n taxa from a population of size theta."""
+    """Sample coalescent intervals for n taxa from population of size theta."""
     # Algorithm given by Felsenstein (2004) Chapter 26 pp. 456
     for k in range(n, 1, -1):
         # Using scale = 1/lambda parameterisation
         yield random.exponential(2 * theta / (k * (k-1)))
 
 def coal_coalescents(n, theta):
-    """Sample coalescent times for n taxa from a population of size theta."""
+    """Sample coalescent times for n taxa from population of size theta."""
     # Running sum of intervals
     return it.accumulate(coal_intervals(n, theta))
 
-# Short names of our tree models
+# Short names of the tree models
 TREE_MODELS = {'yule': yule_speciations, 'coal': coal_coalescents}
 
 def simulate_tree(n, p, model):
     """Simulate a tree on n taxa according to the model with parameter p."""
 
-    nodes = [] # active nodes
+    nodes = [] # Active nodes
 
     # Create leaf nodes with integer labels
     for i in map(str, range(n)):
@@ -98,7 +99,7 @@ def simulate_tree(n, p, model):
     return Tree(nodes[0])
 
 class SubstModel:
-    """Represents a substitution model for molecular evolution along a tree."""
+    """Represents a nucleotide substitution model."""
     # The genetic code
     BASES = ('A', 'C', 'G', 'T')
     # Standard basis vectors for 4-dimensional space
@@ -115,23 +116,23 @@ class SubstModel:
 
     def transition_matrix(self, t):
         """Computes the finite time transition matrix."""
-        # Matrix exponential by diagonlisation
+        # Matrix exponential by diagonalisation
         # Felsenstein (2004) Chapter 13 pp. 206
         return self.T * np.diag(np.exp(t * self.mu * self.L)) * self.Tinv
 
     def random_sequence(self, L):
+        """Draw a random sequence under model."""
         # Draw bases according to equilibrium frequencies
         return ''.join(random.choice(SubstModel.BASES, size=L, p=self.pi))
 
     def mutate_sequence(self, S, t):
-        """Simulates mutations on a sequence for time t according to model."""
+        """Simulates mutations on a sequence for time t under model."""
         P = self.transition_matrix(t)
         # Precompute transition probabilities conditioning on ancestral base
         p = {}
         for b, e in zip(SubstModel.BASES, SubstModel.E):
             p[b] = np.squeeze(np.asarray(P * e))
-            p[b] /= p[b].sum() # Deal with numerical imprecision
-        # Draw bases according to conditioned transition probabilities
+        # Draw bases according to conditional transition probabilities
         return ''.join(random.choice(SubstModel.BASES, p=p[x]) for x in S)
 
     def create_Q(abcdef, pi):
@@ -187,7 +188,8 @@ def simulate_sequences(node, model, length=None):
             simulate_sequences(child, model)
 
 # Setup command line options
-parser = ArgumentParser(description='Simulate a tree and sequences.')
+parser = ArgumentParser(description='A simulator of Coalescent and Yule trees'
+                                             + ' and GTR Nucleotide Sequences.')
 parser.add_argument('-n', '--taxa', metavar='N', type=int, required=True,
                     help='the number of taxa')
 parser.add_argument('-t', '--tree-model',
@@ -195,13 +197,13 @@ parser.add_argument('-t', '--tree-model',
                     type=lambda x: TREE_MODELS[x],
                     choices=TREE_MODELS.values(),
                     required=True, help='the tree model')
-parser.add_argument('-b', '--theta', '--lambda', metavar='R', type=float,
+parser.add_argument('-b', '--theta', '--lambda', metavar='B', type=float,
                     required=True, help='the parameter for the tree model')
 parser.add_argument('-l', '--length', metavar='L', type=int, required=True,
                     help='the length of the sequence')
 parser.add_argument('-f', '--frequencies', metavar=SubstModel.BASES,
                     type=float, nargs=4, required=True,
-                    help='the stationary distribution for the BASES')
+                    help='the stationary distribution for the bases')
 parser.add_argument('-q', '--rate-matrix',
                     metavar=tuple(string.ascii_lowercase[:6]), type=float,
                     nargs=6, required=True,
@@ -224,7 +226,7 @@ sm = SubstModel(args.mutation_rate, args.rate_matrix, args.frequencies)
 # Simulate the sequence alignment
 simulate_sequences(tree, sm, args.length)
 
-# Write the alignment to a nexus file
+# Write the alignment to a NEXUS file
 with open('{}.nex'.format(args.filename), 'w') as f:
     print('#NEXUS', file=f)
     print('Begin data;', file=f)
