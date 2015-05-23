@@ -2,6 +2,8 @@
 
 A simulator of Coalescent and Yule trees and GTR Nucleotide Sequences.
 
+To run the example, try `./example.sh`.
+
 ```
 usage: cygnus.py [-h] -n N -t {coal,yule} -b B -l L -f A C G T -q a b c d e f
                  -m mu
