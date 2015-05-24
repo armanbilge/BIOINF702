@@ -73,7 +73,7 @@ def simulate_tree(n, p, model):
     nodes = [] # Active nodes
 
     # Create leaf nodes with integer labels
-    for i in map(str, range(n)):
+    for i in map(str, range(1, n+1)):
         node = Node(i)
         node.set_height(0)
         nodes.append(node)
@@ -234,8 +234,10 @@ with open('{}.nex'.format(args.filename), 'w') as f:
           args.length), file=f)
     print('Format datatype=dna missing=? gap=-;', file=f)
     print('Matrix', file=f)
+    # Format spec so alignment starts at same column for all taxa
+    format = '{{:<{}}} {{}}'.format(len(str(tree.get_leaf_count())))
     # Iterate over leaves in order
     for leaf in sorted(tree.get_leaves(), key=lambda n: int(n.get_label())):
-        print('{}    {}'.format(leaf.get_label(), leaf.get_sequence()), file=f)
+        print(format.format(leaf.get_label(), leaf.get_sequence()), file=f)
     print(';', file=f)
     print('End;', file=f)
