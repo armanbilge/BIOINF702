@@ -6,9 +6,9 @@ task 'assignment3' => 'assignment3.pdf'
 
 task 'assignment4' => 'assignment4.pdf'
 
-file 'apa.csl' do |t|
+rule '.csl' do |t|
   open(t.name, 'w') do |f|
-    f << open('https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl').read
+    f << open("https://raw.githubusercontent.com/citation-style-language/styles/master/#{t.name}").read
   end
 end
 
@@ -20,10 +20,10 @@ file 'assignment3.pdf' => ['assignment3.md', 'apa.csl'] do |t|
   sh "pandoc --filter pandoc-citeproc #{t.source} -o #{t.name}"
 end
 
-file 'assignment3.tex' => ['assignment3.md', 'apa.csl'] do |t|
+file 'assignment3-clean.md' => ['assignment3.md', 'apa.csl'] do |t|
   sh "pandoc --filter pandoc-citeproc #{t.source} -o #{t.name}"
 end
 
-task 'wc' => 'assignment3.tex' do |t|
-  sh "texcount #{t.source}"
+task 'wc' => 'assignment3-clean.md' do |t|
+  sh "wc #{t.source}"
 end

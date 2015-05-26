@@ -18,7 +18,7 @@ references:
     family: Rigden
   publisher: Springer
   publisher-place: Netherlands
-  page: 57--90
+  page: 57–90
   DOI: 10.1007/978-1-4020-9058-5_3
 - id: Her+14
   type: article-journal
@@ -39,8 +39,27 @@ references:
   container-title: Mol Biol Evol
   volume: 31
   issue: 9
-  page: 2251--2266
+  page: 2251–2266
   DOI: 10.1093/molbev/msu184
+- id: Kav+98
+  author:
+  - given: Jeffrey S.
+    family: Kavanaugh
+  - given: Jamie A.
+    family: Weydert
+  - given: Paul H.
+    family: Rogers
+  - given: Arthur
+    family: Arnone
+  type: article-journal
+  issued:
+    year: 1998
+  title: "High-Resolution Crystal Structures of Human Hemoglobin with Mutations at Tryptophan 37beta: Structural Basis for a High-Affinity T-State"
+  container-title: Biochemistry
+  volume: 37
+  issue: 13
+  page: 4358–4373
+  DOI: 10.1021/bi9708702
 - id: Lup08
   type: article-journal
   author:
@@ -52,7 +71,7 @@ references:
   container-title: Journal of Structural Biology
   volume: 163
   issue: 3
-  page: 254--257
+  page: 254–257
   DOI: 10.1016/j.jsb.2008.02.006
 - id: LWZ09
   type: chapter
@@ -93,8 +112,23 @@ references:
   container-title: Proteins
   volume: 82
   issue: Suppl 2
-  page: 1--6
+  page: 1–6
   DOI: 10.1002/prot.24452
+- id: XZ12
+  type: article-journal
+  author:
+  - given: Dong
+    family: Xu
+  - given: Yang
+    family: Zhang
+  issued:
+    year: 2012
+  title: "*Ab initio* protein structure assembly using continuous structure fragments and optimized knowledge-based force field"
+  container-title: Proteins
+  volume: 80
+  issue: 7
+  page: 1715–1735
+  DOI: 10.1002/prot.24065
 ...
 
 \frenchspacing
@@ -123,11 +157,11 @@ evolution (comparative, template-based methods).
 However, @Lup08 emphasised that the true solution to this problem is *ab
 initio* given the limited usefulness of comparative methods to make accurate
 predictions, especially in the absence of substantial prior information.
-Because *ab initio* methods actually simulate the folding of the protein,
-they may yield important insights into the folding process.
-Furthermore, the dichotomy described by @Fis09 is less clear-cut in practice:
-many otherwise *ab inito* methods do take advantage of the knowledge in
-databases [@LWZ09] and template-based methods still rely on physics for
+Furthermore, the *ab initio* methods that actually simulate the folding of a
+protein may yield important insights into this process.
+It is worth nothing that the dichotomy described by @Fis09 is less clear-cut in
+practice: many otherwise *ab inito* methods do take advantage of the knowledge
+in databases [@LWZ09] and template-based methods still rely on physics for
 refinement as it is impossible to make accurate predictions solely based on
 homology [@Fis09].
 
@@ -136,7 +170,7 @@ is an optimisation problem.
 The key challenges are then (1) deriving a scoring function that gives the best
 score to the true structure and (2) developing a search algorithm that can find
 this structure with the optimal score.
-I will consider both aspects of the problem.
+I will consider both of these aspects.
 
 # Scoring Functions
 
@@ -145,6 +179,18 @@ thermodynamically stable one and thus structures are scored according to an
 energy function.
 Both physics- and knowledge-based energy functions are used in this context.
 
+# Search Algorithms
+
+The total search space for any reasonably-sized protein is immense.
+Proteins are generally modelled on the atomic level, where each atom is
+represented by three coordinates (either using the Cartesian system or the
+torsion-angle system), such that a protein consisting of $n$ atoms has $n-1$
+degrees of freedom [@XZ12].
+The beta subunit of haemoglobin consists of nearly 5000 atoms for some 15000
+degrees of freedom [@Kav+98].
+
+It comes as no surprise that template-based methods have been successful given
+their ability to aggressively reduce the search space.
 
 # Concluding Remarks
 
