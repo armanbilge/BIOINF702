@@ -138,7 +138,8 @@ references:
 Proteins play a fundamental role in effectively all metabolic pathways and thus
 are at the heart of molecular biology and biochemistry.
 The function of a protein is directly related to its structure, the series of
-folds that occur along the sequence of amino acids comprising the protein.
+folds that occur along the sequence of amino acids comprising the protein
+[@Fis09].
 Knowledge of protein structure also has important implications for evolutionary
 biology.
 Specifically, because structure is conserved more strongly than molecular
@@ -161,8 +162,8 @@ Furthermore, the *ab initio* methods that actually simulate the folding of a
 protein may yield important insights into this process.
 It is worth nothing that the dichotomy described by @Fis09 is less clear-cut in
 practice: many otherwise *ab inito* methods do take advantage of the knowledge
-in databases [@LWZ09] and template-based methods still rely on physics for
-refinement as it is impossible to make accurate predictions solely based on
+in databases [@Fis09; @LWZ09] and template-based methods still rely on physics
+for refinement as it is impossible to make accurate predictions solely based on
 homology [@Fis09].
 
 From a computer science perspective, the protein structure prediction problem
@@ -184,13 +185,22 @@ Both physics- and knowledge-based energy functions are used in this context.
 The total search space for any reasonably-sized protein is immense.
 Proteins are generally modelled on the atomic level, where each atom is
 represented by three coordinates (either using the Cartesian system or the
-torsion-angle system), such that a protein consisting of $n$ atoms has $n-1$
-degrees of freedom [@XZ12].
+torsion-angle system), such that a protein consisting of $n$ atoms has
+$3\left(n-1\right)$ degrees of freedom [@XZ12].
 The beta subunit of haemoglobin consists of nearly 5000 atoms for some 15000
 degrees of freedom [@Kav+98].
 
+
+
 It comes as no surprise that template-based methods have been successful given
-their ability to aggressively reduce the search space.
+their ability to aggressively reduce the search space by applying the concept
+that a small change in sequence should cause only a small change in structure
+[@Fis09].
+The first steps for these methods involve searching through the PDB for
+homologous structures and deciding which parts of these to use, if any
+[@Fis09].
+
+
 
 # Concluding Remarks
 
