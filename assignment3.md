@@ -348,9 +348,9 @@ evolution (comparative, template-based methods).
 However, @Lup08 emphasised that the true solution to this problem is *ab
 initio* given the limited usefulness of comparative methods to make accurate
 predictions, especially in the absence of substantial prior information.
-It is worth noting that the dichotomy described by @Fis09 is less clear-cut in
-practice: many otherwise *ab inito* methods do take advantage of the knowledge
-in databases [@Fis09; @LWZ09] and template-based methods still rely on physics
+It is worth noting that ths dichotomy is less clear-cut in practice: many
+otherwise *ab inito* methods do take advantage of the knowledge in databases
+[@Fis09; @LWZ09; @ZS11; @XZ12] and template-based methods still rely on physics
 for refinement as it is impossible to make accurate predictions solely based on
 homology [@Fis09].
 
@@ -374,12 +374,13 @@ and thus structures are scored according to an energy function [@Fis09;
 Both physics- and knowledge-based energy functions are used for this purpose
 [@LWZ09; @ZS11].
 
-Given a scoring function, parameter optimisation is a well-studied problem with
-several existing methodologies.
-The main techniques applied to protein structure prediction include Monte Carlo
+Parameter optimisation is a well-studied problem with several existing
+methodologies.
+The main techniques applied to protein structure prediction
+include Monte Carlo
 (with simulated annealing) [@Fis09; @LWZ09; @NJ12; @XZ12; @Yan+15], molecular
 dynamics simulations [@Lup08; @Fis09; @LWZ09; @Mar+11; @Dav+12; @Rav+12;
-@MNF14], genetic algorithms.
+@MNF14], and genetic algorithms.
 
 The total search space for any reasonably-sized protein is immense.
 Proteins are generally modelled on the atomic level, where each atom is
@@ -392,9 +393,12 @@ some 15000 degrees of freedom [@Kav+98].
 considered in an accurate physical model, which must also consider the
 solvent.)
 
-Templated-based prediction is effectively a strategy to start with a good
-model of the protein and thus relieve the burden of searching the entire space.
-The first
+Template-based prediction aggressively reduce the search space by applying
+the assumption that a small change in sequence should only cause a small change
+in structure [@Fis09].
+The first steps for these methods involve searching through the PDB for
+homologous structures and deciding which parts of these to use, if any
+[@Fis09].
 
 It is important to note that no search algorithm can compensate for a poor
 scoring function, as its responsibility is to find the best-scoring structure
@@ -405,16 +409,6 @@ that the accuracy of the prediction improves.
 Given the exten
 Most of the recent advances in protein structure prediction are primarily
 focused on
-
-It comes as no surprise that template-based methods have been successful given
-their ability to aggressively reduce the search space by applying the concept
-that a small change in sequence should cause only a small change in structure
-[@Fis09].
-The first steps for these methods involve searching through the PDB for
-homologous structures and deciding which parts of these to use, if any
-[@Fis09].
-
-
 
 It is clear that no matter what approach is taken to the protein structure
 prediction problem there is still substantial room for improvement.
