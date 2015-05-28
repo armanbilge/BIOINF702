@@ -21,9 +21,9 @@ file 'assignment3.pdf' => ['assignment3.md', 'apa.csl'] do |t|
 end
 
 file 'assignment3-clean.md' => ['assignment3.md', 'apa.csl'] do |t|
-  sh "pandoc --filter pandoc-citeproc #{t.source} -o #{t.name}"
+  sh "pandoc -t markdown #{t.source} | sed -e 's/\\[[^][]*\\]//g' | sed -e 's/\\$[^][]*\\$//g' > #{t.name}"
 end
 
 task 'wc' => 'assignment3-clean.md' do |t|
-  sh "wc #{t.source}"
+  sh "#{t.name} #{t.source}"
 end

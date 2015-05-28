@@ -1,7 +1,7 @@
 ---
 title: '[Is the protein folding problem still beyond us?]'
 author: Arman Bilge
-date: Friday 8 May 2015
+date: Friday 29 May 2015
 csl: apa.csl
 references:
 - id: Dav+12
@@ -21,7 +21,7 @@ references:
       family: Papoian
   issued:
     year: 2012
-  title: AWSEM-MD: Protein Structure Prediction Using Coarse-Grained Physical Potentials and Bioinformatically Based Local Structure Biasing
+  title: "AWSEM-MD: Protein Structure Prediction Using Coarse-Grained Physical Potentials and Bioinformatically Based Local Structure Biasing"
   container-title: J. Phys. Chem. B
   volume: 116
   issue: 29
@@ -133,8 +133,25 @@ references:
     family: Rigden
   publisher: Springer
   publisher-place: Netherlands
-  page: 3-25
+  page: 3–25
   DOI: 10.1007/978-1-4020-9058-5_1
+- id: Ko+12,
+  type: article-journal
+  author:
+  - given: Junsu
+    family: Ko
+  - given: Hahnbeom
+    family: Park
+  - given: Lim
+    family: Heo
+  - given: Chaok
+    family: Seok
+  title: GalaxyWEB server for protein structure prediction and refinement
+  container-title: Nucleic Acids Research
+  volume: 40
+  issue: Web Server
+  page: W294–W297
+  DOI: 10.1093/nar/gks493
 - id: Mar+11
   type: article-journal
   author:
@@ -163,9 +180,9 @@ references:
 - id: MHS12
   type: article-journal
   author:
-  - given: Debora S
+  - given: Debora S.
     family: Marks
-  - given: Thomas A
+  - given: Thomas A.
     family: Hopf
   - given: Chris
     family: Sander
@@ -177,7 +194,7 @@ references:
   issue: 11
   page: 1072–1080
   DOI: 10.1038/nbt.2419
-- id: MNF13
+- id: MNF14
   type: article-journal
   author:
   - given: Vahid
@@ -266,6 +283,44 @@ references:
   issue: 7
   page: 1715–1735
   DOI: 10.1002/prot.24065
+- id: Yan+15
+  type: article-journal
+  author:
+  - given: Jianyi
+    family: Yang
+  - given: Renxiang
+    family: Yan
+  - given: Ambrish
+    family: Roy
+  - given: Dong
+    family: Xu
+  - given: Jonathan
+    family: Poisson
+  - given: Yang
+    family: Zhang
+  issued:
+    year: 2015
+  title: "The I-TASSER Suite: protein structure and function prediction"
+  container-title: Nature Methods
+  volume: 12
+  issue: 1
+  page: 7–8
+  DOI: 10.1038/nmeth.3213
+- id: ZS11
+  type: article-journal
+  author:
+  - given: Hongyi
+    family: Zhou
+  - given: Jeffrey
+    family: Skolnick
+  issued:
+    year: 2011
+  title: "GOAP: A Generalized Orientation-Dependent, All-Atom Statistical Potential for Protein Structure Prediction"
+  container-title: Biophysical Journal
+  volume: 101
+  issue: 8
+  pages: 2043–2052
+  DOI: 10.1016/j.bpj.2011.09.012
 ...
 
 \frenchspacing
@@ -299,9 +354,9 @@ in databases [@Fis09; @LWZ09] and template-based methods still rely on physics
 for refinement as it is impossible to make accurate predictions solely based on
 homology [@Fis09].
 
-The ideal approach to structure prediction would be naïve complete
-simulation of protein synthesis and folding at the atomic level relying only on
-quantum mechanics and the fundamental laws of physics [@LWZ09].
+The ideal approach to structure prediction would be full simulation of protein
+synthesis and folding at the atomic level relying only on quantum mechanics and
+the fundamental laws of physics [@LWZ09].
 Furthermore, such simulations could yield important insights into the folding
 process itself, which is equally complex and varies even between proteins with
 homologous structure [@Lup08].
@@ -309,7 +364,6 @@ However, due to the immense computational resources necessary for its
 implementation, little serious effort has been made in this area [@LWZ09].
 These limitations force the use of various approximations in the form of
 mathematical, statistical, and computational techniques.
-
 From this perspective, the protein structure prediction problem is framed
 as an optimisation problem, where they key challenges are deriving a scoring
 function that gives the best score to the true structure and developing a
@@ -317,16 +371,30 @@ search algorithm that can find this structure with the optimal score [@LWZ09].
 The correct structure is assumed to be the most thermodynamically stable one
 and thus structures are scored according to an energy function [@Fis09;
 @LWZ09].
-Both physics- and knowledge-based energy functions can used for this purpose
-[@LWZ09].
+Both physics- and knowledge-based energy functions are used for this purpose
+[@LWZ09; @ZS11].
 
 Given a scoring function, parameter optimisation is a well-studied problem with
 several existing methodologies.
-The main techniques applied to protein structure prediction include Monte
-Carlo (with simulated annealing), molecular dynamics simulations, genetic
-algorithms, and database searches [@Fis09; @LWZ09].
+The main techniques applied to protein structure prediction include Monte Carlo
+(with simulated annealing) [@Fis09; @LWZ09; @NJ12; @XZ12; @Yan+15], molecular
+dynamics simulations [@Lup08; @Fis09; @LWZ09; @Mar+11; @Dav+12; @Rav+12;
+@MNF14], genetic algorithms.
 
+The total search space for any reasonably-sized protein is immense.
+Proteins are generally modelled on the atomic level, where each atom is
+represented by three coordinates (either using the Cartesian system or the
+torsion-angle system), such that a protein consisting of $n$ atoms has
+$3\left(n-1\right)$ degrees of freedom [@XZ12].
+For example, the beta subunit of haemoglobin consists of nearly 5000 atoms for
+some 15000 degrees of freedom [@Kav+98].
+(The number of atoms also provides a lower bound on the number of particles
+considered in an accurate physical model, which must also consider the
+solvent.)
 
+Templated-based prediction is effectively a strategy to start with a good
+model of the protein and thus relieve the burden of searching the entire space.
+The first
 
 It is important to note that no search algorithm can compensate for a poor
 scoring function, as its responsibility is to find the best-scoring structure
@@ -338,16 +406,6 @@ Given the exten
 Most of the recent advances in protein structure prediction are primarily
 focused on
 
-The total search space for any reasonably-sized protein is immense.
-Proteins are generally modelled on the atomic level, where each atom is
-represented by three coordinates (either using the Cartesian system or the
-torsion-angle system), such that a protein consisting of $n$ atoms has
-$3\left(n-1\right)$ degrees of freedom [@XZ12].
-For example, the beta subunit of haemoglobin consists of nearly 5000 atoms for
-some 15000 degrees of freedom [@Kav+98].
-The number of atoms also provides a lower bound on the number of particles
-considered in an accurate physical model, which must also consider the solvent.
-
 It comes as no surprise that template-based methods have been successful given
 their ability to aggressively reduce the search space by applying the concept
 that a small change in sequence should cause only a small change in structure
@@ -356,11 +414,18 @@ The first steps for these methods involve searching through the PDB for
 homologous structures and deciding which parts of these to use, if any
 [@Fis09].
 
+
+
 It is clear that no matter what approach is taken to the protein structure
-prediction problem,
+prediction problem there is still substantial room for improvement.
 
-Furthermore, it is difficult to establish how much of the recent advances in
-template-based approaches are due to actual improvements in methodology versus
-
+Furthermore, it is difficult to establish how much of the recent progress in
+protein structure prediction are truly due to intellectual achievements in
+method design [@KFM14].
+Both the amount of computational power available and the number of
+experimentally determined structures have increased substantially in the last
+decade.
+Because these advances improve our ability to accurately predict structures
+it is difficult to perform fair comparisons.
 
 # References
