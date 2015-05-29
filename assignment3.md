@@ -377,10 +377,12 @@ Both physics- and knowledge-based energy functions are used for this purpose
 Parameter optimisation is a well-studied problem with several existing
 methodologies.
 The main techniques applied to protein structure prediction
-include Monte Carlo
-(with simulated annealing) [@Fis09; @LWZ09; @NJ12; @XZ12; @Yan+15], molecular
-dynamics simulations [@Lup08; @Fis09; @LWZ09; @Mar+11; @Dav+12; @Rav+12;
-@MNF14], and genetic algorithms.
+include Monte Carlo (with simulated annealing) [@Fis09; @LWZ09; @NJ12; @XZ12;
+@Yan+15] and molecular dynamics simulations [@Lup08; @Fis09; @LWZ09; @Mar+11;
+@Dav+12; @Rav+12; @MNF14].
+Other optimisation strategies, such as genetic algorithms, have been applied
+to structure prediction [@LWZ09; @Fis09] but appear to be less popular or
+successful [@Mou+14]
 
 The total search space for any reasonably-sized protein is immense.
 Proteins are generally modelled on the atomic level, where each atom is
@@ -389,11 +391,10 @@ torsion-angle system), such that a protein consisting of $n$ atoms has
 $3\left(n-1\right)$ degrees of freedom [@XZ12].
 For example, the beta subunit of haemoglobin consists of nearly 5000 atoms for
 some 15000 degrees of freedom [@Kav+98].
-(The number of atoms also provides a lower bound on the number of particles
-considered in an accurate physical model, which must also consider the
-solvent.)
+The number of atoms also provides a lower bound on the number of particles
+considered in an accurate physical model, which must also consider the solvent.
 
-Template-based prediction aggressively reduce the search space by applying
+Template-based prediction aggressively reduces the search space by applying
 the assumption that a small change in sequence should only cause a small change
 in structure [@Fis09].
 The first steps for these methods involve searching through the PDB for
@@ -408,10 +409,15 @@ the probability that the best-scoring structure is found and not necessarily
 that the accuracy of the prediction improves.
 Given the exten
 Most of the recent advances in protein structure prediction are primarily
-focused on
+focused on improving the energy functions used to score and rank structures.
+
+The refinement of protein structure predictions is a recent area of notable
+advances [@Mou+14].
 
 It is clear that no matter what approach is taken to the protein structure
-prediction problem there is still substantial room for improvement.
+prediction problem there is still substantial progress to be made.
+Although *ab initio* methods are performing better than ever, they still
+struggle to scale for larger proteins [@Mou+14].
 
 Furthermore, it is difficult to establish how much of the recent progress in
 protein structure prediction are truly due to intellectual achievements in
