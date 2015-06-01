@@ -365,7 +365,7 @@ implementation, little serious effort has been made in this area [@LWZ09].
 These limitations force the use of various approximations in the form of
 mathematical, statistical, and computational techniques.
 From this perspective, the protein structure prediction problem is framed
-as an optimisation problem, where they key challenges are deriving a scoring
+as an optimisation problem where the key challenges are deriving a scoring
 function that gives the best score to the true structure and developing a
 search algorithm that can find this structure with the optimal score [@LWZ09].
 The correct structure is assumed to be the most thermodynamically stable one
@@ -374,6 +374,17 @@ and thus structures are scored according to an energy function [@Fis09;
 Both physics- and knowledge-based energy functions are used for this purpose
 [@LWZ09; @ZS11].
 
+For a physics-based energy function, it is necessary to approximate the
+solvent in which the protein exists.
+Modelling the protein *in vacuo* is an easy but poor-performing approximation
+[@LWZ09] due to the significance of water-mediated interactions in protein
+folding [@Dav+12].
+Instead, using a coarse-grained potential to reduce the number of terms in the
+energy function makes computational feasible for a reasonably-accurate
+prediction [@LWZ09; @Dav+12].
+A coarse-grained force field
+
+With an energy function in hand, it remains only to find the best model.
 Parameter optimisation is a well-studied problem with several existing
 methodologies.
 The main techniques applied to protein structure prediction
@@ -382,7 +393,9 @@ include Monte Carlo (with simulated annealing) [@Fis09; @LWZ09; @NJ12; @XZ12;
 @Dav+12; @Rav+12; @MNF14].
 Other optimisation strategies, such as genetic algorithms, have been applied
 to structure prediction [@LWZ09; @Fis09] but appear to be less popular or
-successful [@Mou+14]
+successful [@Mou+14].
+
+
 
 The total search space for any reasonably-sized protein is immense.
 Proteins are generally modelled on the atomic level, where each atom is
