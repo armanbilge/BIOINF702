@@ -177,6 +177,27 @@ references:
   issue: 12
   page: e28766
   DOI: 10.1371/journal.pone.0028766
+- id: Mai+10
+  type: article-journal
+  author:
+  - given: Gia G.
+    family: Maisuradze
+  - given: Patrick
+    family: Senet
+  - given: Cezary
+    family: Czaplewski
+  - given: Adam
+    family: Liwo
+  - given: Harold A.
+    family: Scheraga
+  issued:
+    year: 2010
+  title: Investigation of Protein Folding by Coarse-Grained Molecular Dynamics with the UNRES Force Field
+  container-title: J. Phys. Chem.
+  volume: 114
+  issue: 13
+  page: 4471–4485
+  DOI: 10.1021/jp9117776
 - id: MHS12
   type: article-journal
   author:
@@ -362,6 +383,17 @@ process itself, which is equally complex and varies even between proteins with
 homologous structure [@Lup08].
 However, due to the immense computational resources necessary for its
 implementation, little serious effort has been made in this area [@LWZ09].
+Proteins are generally modelled on the atomic level, where each atom is
+represented by three coordinates (either using the Cartesian system or the
+torsion-angle system), such that a protein consisting of $n$ atoms has
+$3\left(n-1\right)$ degrees of freedom [@XZ12].
+For example, the beta subunit of haemoglobin consists of nearly 5000 atoms for
+some 15000 degrees of freedom [@Kav+98].
+The number of atoms also provides a lower bound on the number of particles
+considered in an accurate physical model, which must also consider the solvent.
+Unfortunately it is infeasible to complete such calculations on a realistic
+time scale.
+
 These limitations force the use of various approximations in the form of
 mathematical, statistical, and computational techniques.
 From this perspective, the protein structure prediction problem is framed
@@ -374,15 +406,33 @@ and thus structures are scored according to an energy function [@Fis09;
 Both physics- and knowledge-based energy functions are used for this purpose
 [@LWZ09; @ZS11].
 
-For a physics-based energy function, it is necessary to approximate the
-solvent in which the protein exists.
+To make computations feasible, an energy function should ideally reduce the
+number of independent particles being considered.
 Modelling the protein *in vacuo* is an easy but poor-performing approximation
 [@LWZ09] due to the significance of water-mediated interactions in protein
 folding [@Dav+12].
-Instead, using a coarse-grained potential to reduce the number of terms in the
-energy function makes computational feasible for a reasonably-accurate
-prediction [@LWZ09; @Dav+12].
-A coarse-grained force field
+Instead, a coarse-grained force field can systematically reduce the number of
+particles in the model without ignoring important interactions by using the
+average energy over the neglected degrees of freedom
+[@Mai+10].
+Each residue is generally represented by the atoms in its backchain (or some
+approximation, as in the UNRES model) and the centre of mass of its side chain
+[@LWZ09; @Dav+12].
+Both the UNRES [@Mai+10] and AWSEM [@Dav+12] models are examples of
+coarse-grained energy functions that are primarily physics-based but are
+augmented with knowledge from the PDB (although a later development of UNRES
+replaces these knowledge-based terms with additional physics-based terms).
+The AWSEM energy function includes terms for the bond lengths and angles of the
+backbone, the placement of the side chain, the interactions between neighboring
+amino acid residues and water, and the inclination for a residue to be within
+or on the outside of the protein [@Dav+12].
+The GOAP [@ZS11], QUARK [@XZ12], and I-TASSER [@Yan+15] energy functions are,
+on the other hand, primarily knowledge-based.
+The information for these methods comes from structural regularities as
+determined empirically from known experimental structures in the PDB
+[@XZ12; @Yan+15].
+While all of the statistical terms used in QUARK are physically motivated
+[@XZ12], the other software
 
 With an energy function in hand, it remains only to find the best model.
 Parameter optimisation is a well-studied problem with several existing
@@ -390,22 +440,17 @@ methodologies.
 The main techniques applied to protein structure prediction
 include Monte Carlo (with simulated annealing) [@Fis09; @LWZ09; @NJ12; @XZ12;
 @Yan+15] and molecular dynamics simulations [@Lup08; @Fis09; @LWZ09; @Mar+11;
-@Dav+12; @Rav+12; @MNF14].
+@Dav+12; @Rav+12; @MNF14; @Mai+10].
+Molecular dynamics strategies are especially suited for structure refinement
+[@Rav+12].
 Other optimisation strategies, such as genetic algorithms, have been applied
 to structure prediction [@LWZ09; @Fis09] but appear to be less popular or
 successful [@Mou+14].
 
+Search strategies also benefit from an approximate model of the protein
+stucture that [@XZ12].
 
-
-The total search space for any reasonably-sized protein is immense.
-Proteins are generally modelled on the atomic level, where each atom is
-represented by three coordinates (either using the Cartesian system or the
-torsion-angle system), such that a protein consisting of $n$ atoms has
-$3\left(n-1\right)$ degrees of freedom [@XZ12].
-For example, the beta subunit of haemoglobin consists of nearly 5000 atoms for
-some 15000 degrees of freedom [@Kav+98].
-The number of atoms also provides a lower bound on the number of particles
-considered in an accurate physical model, which must also consider the solvent.
+Replica-exchange is a flavour of Monte Carlo [@XZ12; @Yan+15].
 
 Template-based prediction aggressively reduces the search space by applying
 the assumption that a small change in sequence should only cause a small change
