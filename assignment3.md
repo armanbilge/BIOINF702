@@ -289,6 +289,21 @@ references:
   issue: 8
   page: 2071–2079
   DOI: 10.1002/prot.24098
+- id: SW86
+  type: article-journal
+  author:
+    - given: Robert H.
+      family: Swendsen
+    - given: Jian-Sheng
+      family: Wang
+  issued:
+    year: 1986
+  title: Replica Monte Carlo Simulation of Spin-Glasses
+  container-title: Phys. Rev. Lett.
+  volume: 57
+  issue: 21
+  page: 2607–2609
+  DOI: 10.1103/PhysRevLett.57.2607
 - id: XZ12
   type: article-journal
   author:
@@ -348,9 +363,9 @@ references:
 
 Proteins play a fundamental role in effectively all metabolic pathways and thus
 are at the heart of molecular biology and biochemistry.
-The function of a protein is directly related to its structure, the series of
-folds that occur along the sequence of amino acids comprising the protein
-[@Fis09].
+The function of a protein is directly related to its structure, determined by
+the series of folds that occur along the sequence of amino acids comprising the
+protein [@Fis09].
 Knowledge of protein structure also has important implications for evolutionary
 biology.
 Specifically, because structure is conserved more strongly than molecular
@@ -373,7 +388,7 @@ It is worth noting that ths dichotomy is less clear-cut in practice: many
 otherwise *ab inito* methods do take advantage of the knowledge in databases
 [@Fis09; @LWZ09; @ZS11; @XZ12] and template-based methods still rely on physics
 for refinement as it is impossible to make accurate predictions solely based on
-homology [@Fis09].
+homology [@Fis09; @Rav+12].
 
 The ideal approach to structure prediction would be full simulation of protein
 synthesis and folding at the atomic level relying only on quantum mechanics and
@@ -385,16 +400,16 @@ However, due to the immense computational resources necessary for its
 implementation, little serious effort has been made in this area [@LWZ09].
 Proteins are generally modelled on the atomic level, where each atom is
 represented by three coordinates (either using the Cartesian system or the
-torsion-angle system), such that a protein consisting of $n$ atoms has
+torsion-angle system), such that a protein model consisting of $n$ atoms has
 $3\left(n-1\right)$ degrees of freedom [@XZ12].
 For example, the beta subunit of haemoglobin consists of nearly 5000 atoms for
 some 15000 degrees of freedom [@Kav+98].
 The number of atoms also provides a lower bound on the number of particles
-considered in an accurate physical model, which must also consider the solvent.
-Unfortunately it is infeasible to complete such calculations on a realistic
-time scale.
+considered in an accurate physical model, which must also model the solvent.
+Unfortunately it is infeasible to complete the calculations necessary for a
+complete simulation on a realistic time scale.
 
-These limitations force the use of various approximations in the form of
+This limitation forces the use of various approximations in the form of
 mathematical, statistical, and computational techniques.
 From this perspective, the protein structure prediction problem is framed
 as an optimisation problem where the key challenges are deriving a scoring
@@ -424,34 +439,75 @@ augmented with knowledge from the PDB (although a later development of UNRES
 replaces these knowledge-based terms with additional physics-based terms).
 The AWSEM energy function includes terms for the bond lengths and angles of the
 backbone, the placement of the side chain, the interactions between neighboring
-amino acid residues and water, and the inclination for a residue to be within
-or on the outside of the protein [@Dav+12].
+amino acid residues and water, and the propensity for a particular residue to
+be within or on the outside of the protein [@Dav+12].
 The GOAP [@ZS11], QUARK [@XZ12], and I-TASSER [@Yan+15] energy functions are,
 on the other hand, primarily knowledge-based.
 The information for these methods comes from structural regularities as
 determined empirically from known experimental structures in the PDB
 [@XZ12; @Yan+15].
-While all of the statistical terms used in QUARK are physically motivated
-[@XZ12], the other software
+Notably, all of the terms used in QUARK are in fact physically-motivated
+despite being computed statistically [@XZ12].
 
 With an energy function in hand, it remains only to find the best model.
 Parameter optimisation is a well-studied problem with several existing
 methodologies.
-The main techniques applied to protein structure prediction
-include Monte Carlo (with simulated annealing) [@Fis09; @LWZ09; @NJ12; @XZ12;
-@Yan+15] and molecular dynamics simulations [@Lup08; @Fis09; @LWZ09; @Mar+11;
-@Dav+12; @Rav+12; @MNF14; @Mai+10].
+The main techniques used for protein structure prediction include Monte Carlo
+(with simulated annealing) [@Fis09; @LWZ09; @NJ12; @XZ12; @Yan+15] and
+molecular dynamics simulations
+[@Lup08; @Fis09; @LWZ09; @Mar+11; @Dav+12; @Rav+12; @MNF14; @Mai+10].
 Molecular dynamics strategies are especially suited for structure refinement
 [@Rav+12].
 Other optimisation strategies, such as genetic algorithms, have been applied
 to structure prediction [@LWZ09; @Fis09] but appear to be less popular or
 successful [@Mou+14].
+Searching for the optimal structure is difficult because the "landscape"
+defined by the energy function is rugged, causing algorithms to become stuck
+in local minima [@LWZ09].
+Search strategies benefit from an approximate model of the protein stucture
+that reduce the degrees of freedom and, therefore, the total space of
+structures to be searched [@XZ12].
 
-Search strategies also benefit from an approximate model of the protein
-stucture that [@XZ12].
+Monte Carlo and molecular dynamics algorithms differ in the amount of change
+that occurs in a single iteration and are thus best applied in different
+situations.
+In a molecular dynamics simulation, the protein structure at any given time
+can be found by solving Newton's equations of motions, with the idea that
+after enough time the protein will be in its most thermodynamically stable
+state [@LWZ09].
+However, because there is no explicit solution, numerical integration must be
+used instead.
+Thus, each iteration of the simulation is generally on the order of
+femtoseconds (one quadrillionth of a second) [@LWZ09].
+Given that a complete simulation takes milliseconds, trillions of iterations
+of the molecular dynamics algorithm become necessary [@LWZ09].
+Each iteration involves computing the derivative, or slope, of the energy
+function at that point with respect to every degree of freedom.
+This requirement restricts either the complexity of the energy function,
+as it must be analytically differentiable, or increases the computational
+effort if numerical differentiation is used instead.
+On the other hand, Monte Carlo algorithms use large proposals to rapidly
+traverse the state space.
+The Monte Carlo algorithm samples structures according to the energy function
+at a given temperature, so for the algorithm to settle at the optimal structure
+the temperature is gradually lowered [@LWZ09].
+This procedure is known as simulated annealing [@LWZ09].
+Although Monte Carlo with simulated annealing is not a greedy algorithm due
+to its use of the Metropolis criterion, if the algorithm is exploring a local
+optimum when the temperature is decreased then it will very likely get stuck at
+that local optimum.
+Replica-exchange is a flavour of Monte Carlo that builds on simulated annealing
+and is used in QUARK, I-TASSER, and Rosetta [@SW86; @XZ12; @Yan+15].
+Unlike the standard Monte Carlo algorithm, the replica-exchange algorithm
+involves simultaneous simulation at different temperatures of several replicas
+of the model [@SW86], with more replicas used for larger proteins [@Yan+15].
+Periodically, a global swap of model features between the replicas is
+attempted [@Yan+15].
+The use of multiple simulations and exchanges between these simulations helps
+to prevent the algorithm from getting stuck in a local optimum.
 
-Replica-exchange is a flavour of Monte Carlo [@XZ12; @Yan+15].
-
+Even with sophisticated search algorithms finding the optimal structure
+remains very difficult.
 Template-based prediction aggressively reduces the search space by applying
 the assumption that a small change in sequence should only cause a small change
 in structure [@Fis09].
@@ -459,15 +515,23 @@ The first steps for these methods involve searching through the PDB for
 homologous structures and deciding which parts of these to use, if any
 [@Fis09].
 
+However, template-based prediction neglects non-homologous fragments in the
+protein.
+
+
 It is important to note that no search algorithm can compensate for a poor
-scoring function, as its responsibility is to find the best-scoring structure
-by that function.
+scoring function, as its responsibility is only to find the best-scoring
+structure by that function.
 Improvements to the search algorithm only affect the speed of prediction and
 the probability that the best-scoring structure is found and not necessarily
-that the accuracy of the prediction improves.
-Given the exten
-Most of the recent advances in protein structure prediction are primarily
-focused on improving the energy functions used to score and rank structures.
+that the accuracy of the prediction improves [@MNF14].
+Furthermore, @Rav+12 suggested that inaccurate force fields are the limiting
+factor in protein structure prediction because they found that refinement using
+molecular dynamics simulations caused the model to move away from the true
+structure.
+Accordingly, most of the recent advances in protein structure prediction are
+primarily focused on improving the energy functions used to score and rank
+structures.
 
 The refinement of protein structure predictions is a recent area of notable
 advances [@Mou+14].
@@ -477,8 +541,9 @@ prediction problem there is still substantial progress to be made.
 Although *ab initio* methods are performing better than ever, they still
 struggle to scale for larger proteins [@Mou+14].
 
-Furthermore, it is difficult to establish how much of the recent progress in
-protein structure prediction are truly due to intellectual achievements in
+Perhaps the greatest challenge in evaluating advances in protein structure
+prediction is that it is difficult to establish how much of the recent progress
+in protein structure prediction are truly due to intellectual achievements in
 method design [@KFM14].
 Both the amount of computational power available and the number of
 experimentally determined structures have increased substantially in the last
