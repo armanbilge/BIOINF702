@@ -1,9 +1,42 @@
 ---
-title: '[Is the protein folding problem still beyond us?]'
+title: Is the protein folding problem still beyond us?
 author: Arman Bilge
-date: Friday 29 May 2015
+date: Thursday 4 June 2015
 csl: apa.csl
 references:
+- id: Bia+14
+  type: article-journal
+  author:
+  - given: Marco
+    family: Biasini
+  - given: Stefan
+    family: Bienert
+  - given: Andrew
+    family: Waterhouse
+  - given: Konstantin
+    family: Arnold
+  - given: Gabriel
+    family: Studer
+  - given: Tobias
+    family: Schmidt
+  - given: Florian
+    family: Kiefer
+  - given: Tiziano Gallo
+    family: Cassarino
+  - given: Martino
+    family: Bertoni
+  - given: Lorenza
+    family: Bordoli
+  - given: Torsten
+    family: Schwede
+  issued:
+    year: 2014
+  title: "SWISS-MODEL: modelling protein tertiary and quaternary structure using evolutionary information"
+  container-title: Nucleic Acids Research
+  volume: 42
+  issue: Web Server
+  page: W252–W258
+  DOI: 10.1093/nar/gku340
 - id: Dav+12
   type: article-journal
   author:
@@ -64,7 +97,52 @@ references:
   issue: 9
   page: 2251–2266
   DOI: 10.1093/molbev/msu184
+- id: Hua+14
+  type: article-journal
+  author:
+  - given: Yuanpeng J.
+    family: Huang
+  - given: Binchen
+    family: Mao
+  - given: James M.
+    family: Aramani
+  - given: Gaetano T.
+    family: Montelione
+  issued:
+    year: 2014
+  title: Assessment of template-based protein structure predictions in CASP10
+  container-title: Proteins
+  volume: 82
+  issue: Suppl 2
+  page: 46–56
+  DOI: 10.1002/prot.24488
+- id: Kal+12
+  type: article-journal
+  author:
+  - given: Morten
+    family: Källberg
+  - given: Haipeng
+    family: Wang
+  - given: Sheng
+    family: Wang
+  - given: Jian
+    family: Peng
+  - given: Zhiyong
+    family: Wang
+  - given: Hui
+    family: Lu
+  - given: Jinbo
+    family: Xu
+  issued:
+    year: 2012
+  title: Template-based protein structure modeling using the RaptorX web server
+  container-title: Nature Protocols
+  volume: 7
+  issue: 8
+  page: 1511–1522
+  DOI: 10.1038/nprot.2012.085
 - id: Kav+98
+  type: article-journal
   author:
   - given: Jeffrey S.
     family: Kavanaugh
@@ -74,7 +152,6 @@ references:
     family: Rogers
   - given: Arthur
     family: Arnone
-  type: article-journal
   issued:
     year: 1998
   title: "High-Resolution Crystal Structures of Human Hemoglobin with Mutations at Tryptophan 37beta: Structural Basis for a High-Affinity T-State"
@@ -102,6 +179,23 @@ references:
   issue: Suppl 2
   page: 164–174
   DOI: 10.1002/prot.24448
+- id: Ko+12
+  type: article-journal
+  author:
+  - given: Junsu
+    family: Ko
+  - given: Hahnbeom
+    family: Park
+  - given: Lim
+    family: Heo
+  - given: Chaok
+    family: Seok
+  title: GalaxyWEB server for protein structure prediction and refinement
+  container-title: Nucleic Acids Research
+  volume: 40
+  issue: Web Server
+  page: W294–W297
+  DOI: 10.1093/nar/gks493
 - id: Lup08
   type: article-journal
   author:
@@ -135,23 +229,6 @@ references:
   publisher-place: Netherlands
   page: 3–25
   DOI: 10.1007/978-1-4020-9058-5_1
-- id: Ko+12,
-  type: article-journal
-  author:
-  - given: Junsu
-    family: Ko
-  - given: Hahnbeom
-    family: Park
-  - given: Lim
-    family: Heo
-  - given: Chaok
-    family: Seok
-  title: GalaxyWEB server for protein structure prediction and refinement
-  container-title: Nucleic Acids Research
-  volume: 40
-  issue: Web Server
-  page: W294–W297
-  DOI: 10.1093/nar/gks493
 - id: Mar+11
   type: article-journal
   author:
@@ -232,6 +309,18 @@ references:
   issue: Suppl 2
   page: 196–207
   DOI: 10.1002/prot.24336
+- id: Moo65
+  type: article-journal
+  author:
+  - given: Gordon E.
+    family: Moore
+  issued:
+    year: 1965
+  title: Cramming more components onto integrated circuits
+  container-title: Electronics
+  volume: 38
+  issue: 8
+  page: 114–117
 - id: Mou+14
   type: article-journal
   author:
@@ -253,6 +342,23 @@ references:
   issue: Suppl 2
   page: 1–6
   DOI: 10.1002/prot.24452
+- id: NCJ14
+  type: article-journal
+  author:
+  - given: Timothy
+    family: Nugent
+  - given: Domenico
+    family: Cozzetto
+  - given: David T.
+    family: Jones
+  issued:
+    year: 2014
+  title: Evaluation of predictions in the CASP10 model refinement category
+  container-title: Proteins
+  volume: 82
+  issue: Suppl 2
+  page: 98–111
+  DOI: 10.1002/prot.24377
 - id: NJ12
   type: article-journal
   author:
@@ -292,10 +398,10 @@ references:
 - id: SW86
   type: article-journal
   author:
-    - given: Robert H.
-      family: Swendsen
-    - given: Jian-Sheng
-      family: Wang
+  - given: Robert H.
+    family: Swendsen
+  - given: Jian-Sheng
+    family: Wang
   issued:
     year: 1986
   title: Replica Monte Carlo Simulation of Spin-Glasses
@@ -304,6 +410,25 @@ references:
   issue: 21
   page: 2607–2609
   DOI: 10.1103/PhysRevLett.57.2607
+- id: Tai+14
+  type: article-journal
+  author:
+  - given: Chin-Hsien
+    family: Tai
+  - given: Hongjun
+    family: Bai
+  - given: Todd J.
+    family: Taylor
+  - given: Byungkook
+    family: Lee
+  issued:
+    year: 2014
+  title: Assessment of template-free modeling in CASP10 and ROLL
+  container-title: Proteins
+  volume: 82
+  issue: Suppl 2
+  page: 57–83
+  DOI: 10.1002/prot.24470
 - id: XZ12
   type: article-journal
   author:
@@ -373,7 +498,7 @@ sequence [@Fis09], structural information makes it possible to accurately
 determine the evolutionary relationships between distantly related species
 [@Her+14].
 However, the technical difficulties in experimentally determining the structure
-of a protein have created a rapidly growing gap between the total number of
+of a protein have created a rapidly-growing gap between the total number of
 sequenced proteins and those with a known structure [@LWZ09; @MHS12].
 @LWZ09 suggested that structural prediction *in silico* is the only way to
 close this gap.
@@ -384,7 +509,7 @@ evolution (comparative, template-based methods).
 However, @Lup08 emphasised that the true solution to this problem is *ab
 initio* given the limited usefulness of comparative methods to make accurate
 predictions, especially in the absence of substantial prior information.
-It is worth noting that ths dichotomy is less clear-cut in practice: many
+It is worth noting that this dichotomy is less clear-cut in practice: many
 otherwise *ab inito* methods do take advantage of the knowledge in databases
 [@Fis09; @LWZ09; @ZS11; @XZ12] and template-based methods still rely on physics
 for refinement as it is impossible to make accurate predictions solely based on
@@ -436,18 +561,29 @@ approximation, as in the UNRES model) and the centre of mass of its side chain
 Both the UNRES [@Mai+10] and AWSEM [@Dav+12] models are examples of
 coarse-grained energy functions that are primarily physics-based but are
 augmented with knowledge from the PDB (although a later development of UNRES
-replaces these knowledge-based terms with additional physics-based terms).
+replaced these knowledge-based terms with additional physics-based terms).
 The AWSEM energy function includes terms for the bond lengths and angles of the
-backbone, the placement of the side chain, the interactions between neighboring
+backbone, the placement of the side chain, the interactions between neighbouring
 amino acid residues and water, and the propensity for a particular residue to
 be within or on the outside of the protein [@Dav+12].
-The GOAP [@ZS11], QUARK [@XZ12], and I-TASSER [@Yan+15] energy functions are,
-on the other hand, primarily knowledge-based.
+
+Alternatively, the GOAP, QUARK, and I-TASSER energy functions are primarily
+knowledge-based [@ZS11; @XZ12; @Yan+15].
 The information for these methods comes from structural regularities as
 determined empirically from known experimental structures in the PDB
 [@XZ12; @Yan+15].
 Notably, all of the terms used in QUARK are in fact physically-motivated
 despite being computed statistically [@XZ12].
+The EVfold method, which also uses a statistical energy function, takes a
+radically different approach [@Mar+11, @NJ12].
+@Mar+11 attempted to infer the proximity of residues in the structure by using
+information from the mutations across a protein family.
+Specifically, they assumed that residues with physical proximity show higher
+degrees of coevolution, observed as correlated mutations in the sequence
+alignment [@Mar+11].
+Using this data, predicting the protein structure simplified to identifying the
+signal from the noise and deriving an energy function that reflected how well
+a given structure supported the observed residue correlations.
 
 With an energy function in hand, it remains only to find the best model.
 Parameter optimisation is a well-studied problem with several existing
@@ -486,11 +622,19 @@ function at that point with respect to every degree of freedom.
 This requirement restricts either the complexity of the energy function,
 as it must be analytically differentiable, or increases the computational
 effort if numerical differentiation is used instead.
+For the above reasons, molecular dynamics simulations are best-suited for
+refinement of a fairly-accurate structure using a physics-based energy
+function [@LWZ09].
+
 On the other hand, Monte Carlo algorithms use large proposals to rapidly
-traverse the state space.
-The Monte Carlo algorithm samples structures according to the energy function
-at a given temperature, so for the algorithm to settle at the optimal structure
-the temperature is gradually lowered [@LWZ09].
+move through the model space.
+The design of these moves is critical to the algorithm's efficiency.
+QUARK, for example, implements 11 moves that operate at the residue-, segment-,
+and topology-level [@XZ12].
+Using these moves, the Monte Carlo algorithm samples structures according to
+the energy function at a given temperature.
+The temperature is gradually lowered so that the algorithm eventually settles
+at a single, optimal structure [@LWZ09].
 This procedure is known as simulated annealing [@LWZ09].
 Although Monte Carlo with simulated annealing is not a greedy algorithm due
 to its use of the Metropolis criterion, if the algorithm is exploring a local
@@ -499,14 +643,17 @@ that local optimum.
 Replica-exchange is a flavour of Monte Carlo that builds on simulated annealing
 and is used in QUARK, I-TASSER, and Rosetta [@SW86; @XZ12; @Yan+15].
 Unlike the standard Monte Carlo algorithm, the replica-exchange algorithm
-involves simultaneous simulation at different temperatures of several replicas
-of the model [@SW86], with more replicas used for larger proteins [@Yan+15].
+involves simultaneous simulation of several replicas of the model at different
+temperatures [@SW86], with more replicas used for larger proteins [@Yan+15].
 Periodically, a global swap of model features between the replicas is
-attempted [@Yan+15].
+attempted [@SW86].
 The use of multiple simulations and exchanges between these simulations helps
 to prevent the algorithm from getting stuck in a local optimum.
+Furthermore, Monte Carlo algorithms are indifferent to the type of energy
+function used and, if implemented well, can converge to an optimal structure
+fairly quickly.
 
-Even with sophisticated search algorithms finding the optimal structure
+But even with sophisticated search algorithms, finding the optimal structure
 remains very difficult.
 Template-based prediction aggressively reduces the search space by applying
 the assumption that a small change in sequence should only cause a small change
@@ -514,10 +661,52 @@ in structure [@Fis09].
 The first steps for these methods involve searching through the PDB for
 homologous structures and deciding which parts of these to use, if any
 [@Fis09].
+This requires the creation of an accurate sequence alignment of the target to
+the templates [@Fis09].
+There are many existing, well-developed search tools, such as PSI-BLAST, that
+facilitate this process [@Fis09].
+Specialised tools can take advantage of additional structural information when
+creating the alignment: for example, by avoiding placing gaps in important
+structural elements and checking for concurrence between the known and
+predicted secondary structures [@Fis09; @Bia+14].
+The RaptorX server attempts to maximise the consistency between all
+target-template pairs using multiple-template threading and also models
+uncertainties in the final alignment using probability [@Kal+12].
+This step is particularly important because the accuracy of the final,
+predicted structure is sensitive to the accuracy of the sequence alignment
+[@Fis09].
+The choice of a particular template over other options also depends on its
+alignment.
+Choosing which templates to use for which sections of the target protein is
+challenging to do automatically and is ideally overseen by experts [@Fis09].
+Furthermore, @KFM14 indicated that selecting the best available template (i.e.,
+those with closest resemblance to the target structure) becomes more difficult
+when there are a large number of options.
+Again, the use of additional structural information (as discussed above) can
+help choose between templates [@Bia+14].
+Once the templates are selected, the model is assembled using some combination
+of the known structures [@Fis09].
+Any improvements on this model are done via the *ab inito* techniques,
+hence my classification of template-based modelling as primarily a search
+strategy.
 
-However, template-based prediction neglects non-homologous fragments in the
-protein.
-
+A shortcoming of template-based prediction is that it neglects non-homologous
+loops and insertions in the protein, which are often important to its function
+[@Fis09].
+These can be predicted *ab initio* using the methods described previously.
+However, it turns out that the structure of loops can be also be predicted by
+using similar fragments appearing in other proteins on the PDB [@Fis09; @XZ12].
+The small number of unique loops occurring in the PDB indicates that different
+proteins reuse the same fragments and means that they can be used to predict
+the structure of loops in the target protein [@Fis09].
+This observation has led to a greater effort to classify and improve search
+algorithms for loop fragments, as this is the primary limiting factor [@Fis09].
+However, *ab initio* methods are still necessary for longer, unrepresented
+fragments.
+The use of fragment searches can also be extended from loops to modelling any
+part of the protein structure.
+@XZ12 successfully combined the use of fragments with the Monte Carlo algorithm
+in QUARK.
 
 It is important to note that no search algorithm can compensate for a poor
 scoring function, as its responsibility is only to find the best-scoring
@@ -533,22 +722,42 @@ Accordingly, most of the recent advances in protein structure prediction are
 primarily focused on improving the energy functions used to score and rank
 structures.
 
-The refinement of protein structure predictions is a recent area of notable
-advances [@Mou+14].
+There is little doubt that significant progress has been made developing new
+and creative methods for protein structure prediction, but has there been
+equivalent progress in the accuracy of these predictions?
+The CASP experiments are a biennial measure of advances in protein structure
+prediction; the latest published results were for the tenth round [@Mou+14].
+In the last decade of CASP, the best prediction methods improved by 10%,
+although the bulk of this improvement was in the first five years
+[@KFM14; @Mou+14].
+These improvements are best seen in the modelling of small and simple
+structures [@KFM14].
+QUARK was identified as the best-performing method, folding proteins with up to
+1.30 Å root mean squared deviation [@Hua+14; @XZ12], but overall no group or
+method dominated in prediction accuracy [@Tai+14].
+The refinement of predictions is a recent area of notable advances thanks to a
+method that consistently improved the accuracy of structural predictions
+[@Mou+14; @KFM14].
+Interestingly, only in this latest round did methods using physics-based
+energy functions have comparable performance to those using statistical energy
+functions [@NCJ14].
 
 It is clear that no matter what approach is taken to the protein structure
 prediction problem there is still substantial progress to be made.
-Although *ab initio* methods are performing better than ever, they still
-struggle to scale for larger proteins [@Mou+14].
-
-Perhaps the greatest challenge in evaluating advances in protein structure
-prediction is that it is difficult to establish how much of the recent progress
-in protein structure prediction are truly due to intellectual achievements in
-method design [@KFM14].
+Although structure prediction methods are performing better than ever, they
+still struggle to scale for larger proteins [@Mou+14; @Tai+14].
+Additionally, accurately evaluating advances in protein structure is
+challenging because it is difficult to establish how much of the recent
+progress in is truly due to intellectual achievements in method design
+[@KFM14].
 Both the amount of computational power available and the number of
 experimentally determined structures have increased substantially in the last
-decade.
-Because these advances improve our ability to accurately predict structures
-it is difficult to perform fair comparisons.
+decade such that, even after controlling for these advances, it is still
+difficult to perform a fair comparison [@KFM14].
+Although this is promising in the sense that we will inevitably solve the
+protein structure problem thanks to Moore's law [@Moo65], thus facilitating
+research across the biological sciences, many scientists will remain
+unsatisfied until we have true, intuitive understanding of the protein folding
+process.
 
 # References
