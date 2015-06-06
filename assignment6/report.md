@@ -8,9 +8,9 @@ Due to genuine concerns with the stability of BEAST 2 as well as personal
 preference I performed the described analysis using BEAST v1.8.2.
 
  1. I can tell that I ran the chain for long enough ($2 \times 10^7$ states)
-    because all of the ESSs reported by Tracer are greater than 200.
+    because all of the ESSs reported by Tracer were greater than 200.
     Furthermore, the trace for the TMRCA of the in-group appeared to be a
-    "fuzzy caterpillar" which suggests that it was mixing well (Figure 1).
+    "fuzzy caterpillar" which suggested that it was mixing well (Figure 1).
 
  2. The substitution model parameters were significantly different between
     the two genes.
@@ -48,19 +48,19 @@ preference I performed the described analysis using BEAST v1.8.2.
     In this analysis, the posterior distribution on the TMRCA for the in-group
     had a mean of 12.82 Ma and a 95% HPD interval from 7.78 Ma to 18.89 Ma,
     somewhat older than the previously reported dates.
-    The difference indicates that there is useful signal in the additional
+    The difference indicates that there was useful signal in the additional
     NADH5 data that helps to place the TMRCA.
     Additionally, there might be some discrepancy between the substitution
-    rates for the two genes: the mean rate is about twice as fast when
+    rates for the two genes: the mean rate was about twice as fast when
     considering both genes.
     The slower substitution rate of 16S would explain the older placement of
     the TMRCA.
 
  7. The skyline model is not appropriate for this data because it assumes that
     the samples have been taken from a panmictic population.
-    This assumption does not hold when reconstructing a species phylogeny as, by
-    definition, there is no gene flow between different species and therefore
-    mating is not random.
+    This assumption does not hold when reconstructing a species phylogeny as,
+    by definition, there is no gene flow between different species and
+    therefore mating is not random.
     Furthermore, a grouping of individuals from different species is not a
     population.
 
