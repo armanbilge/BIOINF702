@@ -1,0 +1,134 @@
+
+                  BEAST v1.8.2, 2002-2015
+       Bayesian Evolutionary Analysis Sampling Trees
+                 Designed and developed by
+   Alexei J. Drummond, Andrew Rambaut and Marc A. Suchard
+                              
+               Department of Computer Science
+                   University of Auckland
+                  alexei@cs.auckland.ac.nz
+                              
+             Institute of Evolutionary Biology
+                  University of Edinburgh
+                     a.rambaut@ed.ac.uk
+                              
+              David Geffen School of Medicine
+           University of California, Los Angeles
+                     msuchard@ucla.edu
+                              
+                Downloads, Help & Resources:
+                 	http://beast.bio.ed.ac.uk
+                              
+Source code distributed under the GNU Lesser General Public License:
+            	http://code.google.com/p/beast-mcmc
+                              
+                     BEAST developers:
+	Alex Alekseyenko, Guy Baele, Trevor Bedford, Filip Bielejec, Erik Bloomquist, Matthew Hall,
+	Joseph Heled, Sebastian Hoehna, Denise Kuehnert, Philippe Lemey, Wai Lok Sibon Li,
+	Gerton Lunter, Sidney Markowitz, Vladimir Minin, Michael Defoin Platel,
+          	Oliver Pybus, Chieh-Hsi Wu, Walter Xie
+                              
+                         Thanks to:
+    	Roald Forsberg, Beth Shapiro and Korbinian Strimmer
+
+Using BEAGLE library v2.1.2 for accelerated, parallel likelihood evaluation
+2009-2013, BEAGLE Working Group - http://beagle-lib.googlecode.com/
+Citation: Ayres et al (2012) Systematic Biology 61: 170-173 | doi:10.1093/sysbio/syr100
+
+
+
+Random number seed: 1433558058954
+
+
+Failed to load parser: dr.inferencexml.trace.GeneralizedHarmonicMeanAnalysisParser
+line = dr.inferencexml.trace.GeneralizedHarmonicMeanAnalysisParser
+
+
+
+Loading additional development parsers from development_parsers.properties, which is additional set of parsers only available for development version ...
+
+Failed to load parser: dr.evomodel.treelikelihood.RootDiscreteStateStatistic
+line = dr.evomodel.treelikelihood.RootDiscreteStateStatistic
+
+
+WARNING: parser - dr.app.beagle.multidimensionalscaling.MultiDimensionalScalingLikelihood in development_parsers.properties is duplicated, which is REPLACING the same parser loaded previously.
+
+Parsing XML file: cats.xml
+  File encoding: ASCII
+Looking for plugins in /home/arman/felidae/plugins
+Read alignment: alignment1
+  Sequences = 35
+      Sites = 381
+   Datatype = nucleotide
+Read alignment: alignment2
+  Sequences = 35
+      Sites = 319
+   Datatype = nucleotide
+Site patterns 'firsthalf.patterns' created from positions 1-381 of alignment 'alignment1'
+  unique pattern count = 114
+Site patterns 'secondhalf.patterns' created from positions 1-319 of alignment 'alignment2'
+  unique pattern count = 162
+Using Yule prior on tree
+Creating the tree model, 'treeModel'
+  initial tree topology = ((((((((((Felis margarita,Felis silvestris),Leptailurus serval),Prionailurus planiceps),((Caracal caracal,Felis libyca),(Catopuma badia,Herpailurus yaguarondi))),((((Lynx lynx,Lynx rufus),Prionailurus bengalensis),Leopardus tigrinus),Felis chaus)),(Lynx canadensis,Oncifelis geoffroyi)),(((((Acinonyx jubatus,Prionailurus viverrinus),Prionailurus rubiginosa),Oncifelis guigna),((Leopardus wiedii,Pardofelis marmorata),Uncia uncia)),Catopuma temminckii)),((((Felis nigripes,Profelis aurata),Oncifelis colocolo),Otocolobus manul),(Felis catus,Puma concolor))),(((Panthera leo,Panthera onca),Panthera pardus),(Neofelis nebulosa,Panthera tigris))),Crocuta crocuta)
+  tree height = 274.63741037174816
+Using discretized relaxed clock model.
+  over sampling = 1
+  parametric model = logNormalDistributionModel
+   rate categories = 1
+Creating state frequencies model 'firsthalf.frequencies': Using empirical frequencies from data = {0.33787, 0.22497, 0.19921, 0.23796}
+Creating HKY substitution model. Initial kappa = 2.0
+Creating site model: 
+  4 category discrete gamma with initial shape = 0.5
+Creating state frequencies model 'secondhalf.frequencies': Using empirical frequencies from data = {0.3384, 0.26831, 0.07674, 0.31656}
+Creating HKY substitution model. Initial kappa = 2.0
+Creating site model: 
+  4 category discrete gamma with initial shape = 0.5
+Using BEAGLE TreeLikelihood
+  Branch rate model used: discretizedBranchRates
+  Using BEAGLE resource 0: CPU
+    with instance flags:  PRECISION_DOUBLE COMPUTATION_SYNCH EIGEN_REAL SCALING_MANUAL SCALERS_RAW VECTOR_SSE THREADING_NONE PROCESSOR_CPU FRAMEWORK_CPU
+  Ignoring ambiguities in tree likelihood.
+  With 114 unique site patterns.
+  Using rescaling scheme : dynamic (rescaling every 100 evaluations)
+Using BEAGLE TreeLikelihood
+  Branch rate model used: discretizedBranchRates
+  Using BEAGLE resource 0: CPU
+    with instance flags:  PRECISION_DOUBLE COMPUTATION_SYNCH EIGEN_REAL SCALING_MANUAL SCALERS_RAW VECTOR_SSE THREADING_NONE PROCESSOR_CPU FRAMEWORK_CPU
+  Ignoring ambiguities in tree likelihood.
+  With 162 unique site patterns.
+  Using rescaling scheme : dynamic (rescaling every 100 evaluations)
+Creating swap operator for parameter branchRates.categories (weight=10.0)
+Optimization Schedule: default
+Likelihood computation is using an auto sizing thread pool.
+Creating the MCMC chain:
+  chainLength=20000000
+  autoOptimize=true
+  autoOptimize delayed for 200000 steps
+# BEAST v1.8.2, r6692
+# Generated Sat Jun 06 14:34:19 NZST 2015 [seed=1433558058954]
+state	Posterior   	Prior       	Likelihood  	rootHeight  	ucld.mean   
+0	-256126.4954	-238749.6893	-17376.8060 	274.637     	1.00000     	-
+...
+20000000	-5237.9530  	-97.2539    	-5140.6991  	14.2241     	1.16121E-2  	0.06 hours/million states
+
+Operator analysis
+Operator                                          Tuning   Count      Time     Time/Op  Pr(accept) 
+scale(firsthalf.kappa)                            0.474   19556      6734     0.34     0.2657      
+scale(firsthalf.alpha)                            0.61    19410      6832     0.35     0.2386      
+scale(secondhalf.kappa)                           0.507   19340      8064     0.42     0.2692      
+scale(secondhalf.alpha)                           0.562   19594      8230     0.42     0.2686      
+scale(ucld.mean)                                  0.685   585650     260401   0.44     0.2403      
+scale(ucld.stdev)                                 0.438   585106     259969   0.44     0.2774      
+subtreeSlide(treeModel)                           1.687   2931291    487693   0.17     0.2968      
+Narrow Exchange(treeModel)                                2928642    393738   0.13     0.1999      
+Wide Exchange(treeModel)                                  583865     46373    0.08     0.0087      
+wilsonBalding(treeModel)                                  586430     83145    0.14     0.0139      
+scale(treeModel.rootHeight)                       0.572   586023     64536    0.11     0.2546      
+uniform(nodeHeights(treeModel))                           5859080    1152550  0.2      0.4472      
+scale(yule.birthRate)                             0.211   585283     34762    0.06     0.2639      
+up:ucld.mean down:nodeHeights(treeModel)          0.451   585797     266301   0.45     0.2359      
+swapOperator(branchRates.categories)                      1951843    404410   0.21     0.579       
+uniformInteger(branchRates.categories)                    1953090    356914   0.18     0.7009      
+
+1.1664719444444445 hours 

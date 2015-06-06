@@ -101,7 +101,6 @@
 		<taxon idref="Lynx canadensis"/>
 		<taxon idref="Lynx lynx"/>
 		<taxon idref="Lynx rufus"/>
-		<taxon idref="Neofelis nebulosa"/>
 		<taxon idref="Oncifelis colocolo"/>
 		<taxon idref="Oncifelis geoffroyi"/>
 		<taxon idref="Oncifelis guigna"/>
@@ -468,6 +467,12 @@
 		</mrca>
 		<treeModel idref="treeModel"/>
 	</monophylyStatistic>
+	<tmrcaStatistic id="tmrca(Ingroup)" includeStem="false">
+		<mrca>
+			<taxa idref="Ingroup"/>
+		</mrca>
+		<treeModel idref="treeModel"/>
+	</tmrcaStatistic>
 	<tmrcaStatistic id="tmrca(Felidae Not Panthera)" includeStem="false">
 		<mrca>
 			<taxa idref="Felidae Not Panthera"/>
@@ -658,7 +663,7 @@
 	</operators>
 
 	<!-- Define MCMC                                                             -->
-	<mcmc id="mcmc" chainLength="16000000" autoOptimize="true" operatorAnalysis="concat_alignment.ops">
+	<mcmc id="mcmc" chainLength="20000000" autoOptimize="true" operatorAnalysis="cats.ops">
 		<posterior id="posterior">
 			<prior id="prior">
 				<booleanLikelihood>
@@ -720,6 +725,7 @@
 			<prior idref="prior"/>
 			<likelihood idref="likelihood"/>
 			<parameter idref="treeModel.rootHeight"/>
+			<tmrcaStatistic idref="tmrca(Ingroup)"/>
 			<tmrcaStatistic idref="tmrca(Felidae Not Panthera)"/>
 			<parameter idref="yule.birthRate"/>
 			<parameter idref="firsthalf.kappa"/>
@@ -751,3 +757,4 @@
 		</property>
 	</report>
 </beast>
+
