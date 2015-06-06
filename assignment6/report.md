@@ -64,8 +64,6 @@ preference I performed the described analysis using BEAST v1.8.2.
     Furthermore, a grouping of individuals from different species is not a
     population.
 
-# Figures
-
 ![MCMC trace for the TMRCA of the in-group.](trace.pdf)
 
 ![Posterior distribution on the transition--transversion ratio $\kappa$
