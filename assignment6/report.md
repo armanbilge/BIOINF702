@@ -2,6 +2,8 @@
 % Arman Bilge
 % 7 June 2015
 
+\frenchspacing
+
 Due to genuine concerns with the stability of BEAST 2 as well as personal
 preference I performed the described analysis using BEAST v1.8.2.
 
